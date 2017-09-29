@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.0.2 (Python 3.5.2 on linux)" generated="20170929 14:32:01.717">
+<suite name="Client Balance Test" source="/home/artur/Projects/PythonProjects/robot_test_project/robot_project/tests/client_balance_test.robot" id="s1">
+<test name="Test client balance after connected service" id="s1-t1">
+<kw library="resource" name="Get client with positive balance">
+<doc>Возвращает клиента с положительным балансом (при необходимости - создает)</doc>
+<assign>
+<var>${client_id}</var>
+<var>${initial_balance}</var>
+</assign>
+<kw library="DbLibrary" name="Create Client If Not Exist">
+<arguments>
+<arg>John</arg>
+<arg>${5.0}</arg>
+</arguments>
+<assign>
+<var>${client}</var>
+</assign>
+<msg timestamp="20170929 14:32:01.795" level="INFO">${client} = {'client_balance': 3.3, 'client_id': 1}</msg>
+<status status="PASS" endtime="20170929 14:32:01.795" starttime="20170929 14:32:01.794"></status>
+</kw>
+<kw library="Collections" name="Get From Dictionary">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${client}</arg>
+<arg>client_balance</arg>
+</arguments>
+<assign>
+<var>${initial_balance}</var>
+</assign>
+<msg timestamp="20170929 14:32:01.795" level="INFO">${initial_balance} = 3.3</msg>
+<status status="PASS" endtime="20170929 14:32:01.795" starttime="20170929 14:32:01.795"></status>
+</kw>
+<kw library="Collections" name="Get From Dictionary">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${client}</arg>
+<arg>client_id</arg>
+</arguments>
+<assign>
+<var>${client_id}</var>
+</assign>
+<msg timestamp="20170929 14:32:01.795" level="INFO">${client_id} = 1</msg>
+<status status="PASS" endtime="20170929 14:32:01.795" starttime="20170929 14:32:01.795"></status>
+</kw>
+<msg timestamp="20170929 14:32:01.796" level="INFO">${client_id} = 1</msg>
+<msg timestamp="20170929 14:32:01.796" level="INFO">${initial_balance} = 3.3</msg>
+<status status="PASS" endtime="20170929 14:32:01.796" starttime="20170929 14:32:01.793"></status>
+</kw>
+<kw library="ApiLibrary" name="Get Services By Client Id">
+<doc>Возвращает сервисы клиента</doc>
+<arguments>
+<arg>${client_id}</arg>
+</arguments>
+<assign>
+<var>${client_services}</var>
+</assign>
+<msg timestamp="20170929 14:32:01.799" level="INFO">Starting new HTTP connection (1): localhost</msg>
+<msg timestamp="20170929 14:32:01.802" level="INFO">${client_services} = {'count': 3, 'items': [{'cost': 1.2, 'name': 'Service #1', 'id': 1}, {'cost': 0.35, 'name': 'Service #2', 'id': 2}, {'cost': 0.15, 'name': 'Service #3', 'id': 3}]}</msg>
+<status status="PASS" endtime="20170929 14:32:01.802" starttime="20170929 14:32:01.796"></status>
+</kw>
+<kw library="ApiLibrary" name="Get All Services">
+<doc>Возвращает все доступные сервисы</doc>
+<assign>
+<var>${all_services}</var>
+</assign>
+<msg timestamp="20170929 14:32:01.803" level="INFO">Starting new HTTP connection (1): localhost</msg>
+<msg timestamp="20170929 14:32:01.805" level="INFO">${all_services} = {'count': 5, 'items': [{'cost': 1.2, 'name': 'Service #1', 'id': 1}, {'cost': 0.35, 'name': 'Service #2', 'id': 2}, {'cost': 0.15, 'name': 'Service #3', 'id': 3}, {'cost': 0.15, 'name': 'Service #4', ...</msg>
+<status status="PASS" endtime="20170929 14:32:01.805" starttime="20170929 14:32:01.802"></status>
+</kw>
+<kw library="resource" name="Find unconnected service">
+<doc>Возвращает неподключенный у клиента сервис и стоимость</doc>
+<arguments>
+<arg>${client_id}</arg>
+</arguments>
+<assign>
+<var>${service_id}</var>
+<var>${cost}</var>
+</assign>
+<kw library="Utils" name="Find Not Connected Service">
+<doc>Метод для поиска и получения неподключенного клиентом сервиса.</doc>
+<arguments>
+<arg>${client_id}</arg>
+</arguments>
+<assign>
+<var>${service}</var>
+</assign>
+<msg timestamp="20170929 14:32:01.807" level="INFO">Starting new HTTP connection (1): localhost</msg>
+<msg timestamp="20170929 14:32:01.810" level="INFO">Starting new HTTP connection (1): localhost</msg>
+<msg timestamp="20170929 14:32:01.813" level="INFO">${service} = {'cost': 0.15, 'service_id': 4}</msg>
+<status status="PASS" endtime="20170929 14:32:01.813" starttime="20170929 14:32:01.806"></status>
+</kw>
+<kw library="Collections" name="Get From Dictionary">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${service}</arg>
+<arg>cost</arg>
+</arguments>
+<assign>
+<var>${cost}</var>
+</assign>
+<msg timestamp="20170929 14:32:01.814" level="INFO">${cost} = 0.15</msg>
+<status status="PASS" endtime="20170929 14:32:01.814" starttime="20170929 14:32:01.813"></status>
+</kw>
+<kw library="Collections" name="Get From Dictionary">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${service}</arg>
+<arg>service_id</arg>
+</arguments>
+<assign>
+<var>${service_id}</var>
+</assign>
+<msg timestamp="20170929 14:32:01.815" level="INFO">${service_id} = 4</msg>
+<status status="PASS" endtime="20170929 14:32:01.815" starttime="20170929 14:32:01.814"></status>
+</kw>
+<msg timestamp="20170929 14:32:01.816" level="INFO">${service_id} = 4</msg>
+<msg timestamp="20170929 14:32:01.816" level="INFO">${cost} = 0.15</msg>
+<status status="PASS" endtime="20170929 14:32:01.816" starttime="20170929 14:32:01.806"></status>
+</kw>
+<kw library="ApiLibrary" name="Add Service">
+<doc>Метод для подключения клиенту сервиса</doc>
+<arguments>
+<arg>${client_id}</arg>
+<arg>${service_id}</arg>
+</arguments>
+<msg timestamp="20170929 14:32:01.817" level="INFO">Starting new HTTP connection (1): localhost</msg>
+<status status="PASS" endtime="20170929 14:32:01.837" starttime="20170929 14:32:01.816"></status>
+</kw>
+<kw library="DbLibrary" name="Check Client Service">
+<doc>Метод проверяет, проверяет, добавился ли клиент в базу данных.</doc>
+<arguments>
+<arg>${client_id}</arg>
+<arg>${service_id}</arg>
+</arguments>
+<status status="PASS" endtime="20170929 14:32:28.858" starttime="20170929 14:32:01.837"></status>
+</kw>
+<kw library="DbLibrary" name="Get Client Balance">
+<doc>Метод позволяет получить баланс клиента</doc>
+<arguments>
+<arg>${client_id}</arg>
+</arguments>
+<assign>
+<var>${current_balance}</var>
+</assign>
+<msg timestamp="20170929 14:32:28.858" level="INFO">${current_balance} = 3.15</msg>
+<status status="PASS" endtime="20170929 14:32:28.858" starttime="20170929 14:32:28.858"></status>
+</kw>
+<kw library="BuiltIn" name="Evaluate">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>${initial_balance} - ${cost}</arg>
+</arguments>
+<assign>
+<var>${expected_balance}</var>
+</assign>
+<msg timestamp="20170929 14:32:28.859" level="INFO">${expected_balance} = 3.15</msg>
+<status status="PASS" endtime="20170929 14:32:28.859" starttime="20170929 14:32:28.858"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal As Numbers">
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<arguments>
+<arg>${expected_balance}</arg>
+<arg>${current_balance}</arg>
+<arg>Разница баланса до и после подключения услуги отличается от стоимости услуги</arg>
+<arg>${false}</arg>
+</arguments>
+<status status="PASS" endtime="20170929 14:32:28.859" starttime="20170929 14:32:28.859"></status>
+</kw>
+<doc>Проверка баланса клиента после подключения сервиса</doc>
+<status status="PASS" endtime="20170929 14:32:28.859" starttime="20170929 14:32:01.793" critical="yes"></status>
+</test>
+<status status="PASS" endtime="20170929 14:32:28.860" starttime="20170929 14:32:01.718"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="0" pass="1">Critical Tests</stat>
+<stat fail="0" pass="1">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Client Balance Test" fail="0" pass="1" id="s1">Client Balance Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
